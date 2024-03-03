@@ -10,4 +10,4 @@ done
 
 helm repo index . --url https://cloudification-io.github.io
 
-sed -i 's/file:.*helm-toolkit/https:\/\/cloudification-io.github.io\/helm-toolkit/g' index.yaml
+sed -i 's/file:.*helm-toolkit/https:\/\/cloudification-io.github.io/g' index.yaml

@@ -1,0 +1,265 @@
+apiVersion: v1
+entries:
+  cinder:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.007108+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Cinder
+    digest: 4ae92d232a1afc4571bf057e9f47d91fee45f8c3508d96db37e69d3bf0d985cb
+    home: https://docs.openstack.org/cinder/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Cinder/OpenStack_Project_Cinder_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: cinder
+    sources:
+    - https://opendev.org/openstack/cinder
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/cinder-0.3.16.tgz
+    version: 0.3.16
+  glance:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.015762+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Glance
+    digest: 7116e8bc394d3492c9063e03e938241e53045309aa5d58cb80644962bc0ccb20
+    home: https://docs.openstack.org/glance/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Glance/OpenStack_Project_Glance_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: glance
+    sources:
+    - https://opendev.org/openstack/glance
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/glance-0.4.17.tgz
+    version: 0.4.17
+  heat:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.021628+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Heat
+    digest: 491d06c8ad85aa5af2fd1c85224a2975f6d4e091c3f3e1a1d225b65fd147e522
+    home: https://docs.openstack.org/heat/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Heat/OpenStack_Project_Heat_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: heat
+    sources:
+    - https://opendev.org/openstack/heat
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/heat-0.3.8.tgz
+    version: 0.3.8
+  helm-toolkit:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.02461+01:00"
+    description: OpenStack-Helm Helm-Toolkit
+    digest: 44207b94f34d1d48203c3022825e08e39425064c9f7007586ca7aedd8b1b6bbb
+    home: https://docs.openstack.org/openstack-helm
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/OpenStack-Helm/OpenStack_Project_OpenStackHelm_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: helm-toolkit
+    sources:
+    - https://opendev.org/openstack/openstack-helm-infra
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/helm-toolkit-0.2.60.tgz
+    version: 0.2.60
+  horizon:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.03036+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Horizon
+    digest: 304e9dc1501c4bd1afc3eb9a8df2019a40c7a18d07855a212040a10a2cef5609
+    home: https://docs.openstack.org/horizon/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Horizon/OpenStack_Project_Horizon_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: horizon
+    sources:
+    - https://opendev.org/openstack/horizon
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/horizon-0.3.16.tgz
+    version: 0.3.16
+  keystone:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.036964+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Keystone
+    digest: fdef99f0160e3a1f1da111fdfed103290c3c3a43b1e6efe7e724fc0694d01f7c
+    home: https://docs.openstack.org/keystone/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Keystone/OpenStack_Project_Keystone_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: keystone
+    sources:
+    - https://opendev.org/openstack/keystone
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/keystone-0.3.7.tgz
+    version: 0.3.7
+  libvirt:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.04055+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm libvirt
+    digest: be1b224c50393f61250a11a9208154546118121abfb7756be67a742e22c15cc2
+    home: https://libvirt.org
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: libvirt
+    sources:
+    - https://libvirt.org/git/?p=libvirt.git;a=summary
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/libvirt-0.1.28.tgz
+    version: 0.1.28
+  memcached:
+  - apiVersion: v1
+    appVersion: v1.5.5
+    created: "2024-03-03T18:22:17.046473+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Memcached
+    digest: c681356cd7785583630a1ee861df9e4e5546e50b73daf8539540b729df7b2c5d
+    home: https://github.com/memcached/memcached
+    name: memcached
+    urls:
+    - https://velp.github.io/memcached-0.1.13.tgz
+    version: 0.1.13
+  neutron:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.056056+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Neutron
+    digest: c563d9766441b3cb33bd942ff7d5a4d40e2530e27cdff7a494dac0f989dd34a5
+    home: https://docs.openstack.org/neutron/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Neutron/OpenStack_Project_Neutron_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: neutron
+    sources:
+    - https://opendev.org/openstack/neutron
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/neutron-0.3.33.tgz
+    version: 0.3.33
+  nova:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.067765+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Nova
+    digest: 38e05f14e452a6de05aae211753d3da63e0d20e891ad68ba310ac6d7f5c00225
+    home: https://docs.openstack.org/nova/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Nova/OpenStack_Project_Nova_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: nova
+    sources:
+    - https://opendev.org/openstack/nova
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/nova-0.3.36.tgz
+    version: 0.3.36
+  openvswitch:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.07128+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm OpenVSwitch
+    digest: 4de21da9eba48b3549e85f3e6cb2a047afc292e1af32b261ce2aacedd5becec0
+    home: http://openvswitch.org
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Neutron/OpenStack_Project_Neutron_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: openvswitch
+    sources:
+    - https://github.com/openvswitch/ovs
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/openvswitch-0.1.22.tgz
+    version: 0.1.22
+  ovn:
+  - apiVersion: v1
+    appVersion: v23.3.0
+    created: "2024-03-03T18:22:17.074819+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm OVN
+    digest: 26e0919e6f71d54aeb25c4f46423f87202f1e9c7a5db35daa812a8868fefe9f0
+    home: https://www.ovn.org
+    icon: https://www.ovn.org/images/ovn-logo.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: ovn
+    sources:
+    - https://github.com/ovn-org/ovn
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/ovn-0.1.7.tgz
+    version: 0.1.7
+  placement:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-03-03T18:22:17.080533+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://velp.github.io/helm-toolkit
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Placement
+    digest: 193d6bbf244cad12f0dc06452f865a1599a051225d417911dd36f5f0d3b79868
+    home: https://docs.openstack.org/placement/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Placement/OpenStack_Project_Placement_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: placement
+    sources:
+    - https://opendev.org/openstack/placement
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://velp.github.io/placement-0.3.10.tgz
+    version: 0.3.10
+generated: "2024-03-03T18:22:16.997983+01:00"

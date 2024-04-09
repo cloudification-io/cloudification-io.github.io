@@ -1,11 +1,13 @@
 #!/bin/bash
 
-for chart in memcached openvswitch ovn libvirt helm-toolkit; do
-     helm package ../openstack-helm-infra/$chart
+for chart in memcached openvswitch ovn libvirt helm-toolkit ceph-rgw; do
+     echo "Build Chart for openstack-helm-infra/$chart"
+     helm package ./openstack-helm-infra/$chart --dependency-update
 done
 
 for chart in cinder glance heat horizon keystone nova placement neutron; do
-     helm package ../openstack-helm/$chart
+     echo "Build Chart for openstack-helm/$chart"
+     helm package ./openstack-helm/$chart --dependency-update
 done
 
 helm repo index . --url https://cloudification-io.github.io

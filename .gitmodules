@@ -1,0 +1,9 @@
+[submodule "openstack-helm"]
+	path = openstack-helm
+	url = https://github.com/openstack/openstack-helm.git
+    branch = master
+
+[submodule "openstack-helm-infra"]
+    path = openstack-helm-infra
+    url = https://github.com/openstack/openstack-helm-infra.git
+    branch = master

@@ -1,0 +1,6 @@
+exclude:
+- ./openstack-helm
+- ./openstack-helm-infra
+- release.sh
+- README.md
+- .gitmodules

@@ -7,3 +7,8 @@
     path = openstack-helm-infra
     url = https://github.com/openstack/openstack-helm-infra.git
     branch = master
+
+[submodule "openstack-exporter"]
+    path = openstack-exporter
+    url = https://github.com/openstack-exporter/helm-charts.git
+    branch = master

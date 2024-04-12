@@ -1,6 +1,7 @@
 exclude:
 - openstack-helm
 - openstack-helm-infra
+- openstack-exporter
 - release.sh
 - README.md
 - .gitmodules

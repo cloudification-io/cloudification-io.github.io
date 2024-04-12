@@ -5,8 +5,7 @@ openvswitch
 ovn
 libvirt
 helm-toolkit
-ceph-rgw
-prometheus-openstack-exporter"
+ceph-rgw"
 
 openstack_apps="cinder
 glance
@@ -26,6 +25,9 @@ for chart in $(echo ${openstack_apps}); do
      echo "Build Chart for openstack-helm/$chart"
      helm package ./openstack-helm/$chart --dependency-update
 done
+
+echo "Building Chart for Openstack exporter"
+helm package ./openstack-exporter/charts/prometheus-openstack-exporter --dependency-update
 
 helm repo index . --url https://cloudification-io.github.io
 

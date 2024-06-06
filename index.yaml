@@ -3,13 +3,13 @@ entries:
   ceph-rgw:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.316828+02:00"
+    created: "2024-06-06T13:25:05.999133+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Ceph RadosGW
-    digest: 5e0ea515a4b2df35a365100f98553602a982b3be15c7819cd6105a0ffa1a36a6
+    digest: 8861c1a16d30180c999018bb847cee6f44587b9569a853cc79e80ab7e4fe67cf
     home: https://github.com/ceph/ceph
     name: ceph-rgw
     urls:
@@ -17,7 +17,7 @@ entries:
     version: 0.1.34
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.311619+02:00"
+    created: "2024-06-06T13:25:05.996155+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -32,13 +32,13 @@ entries:
   cinder:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.327901+02:00"
+    created: "2024-06-06T13:25:06.006428+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Cinder
-    digest: 032d2636904ae5b82c325a8603bb727e17d565d9d438fbeddfcefa03edcb6042
+    digest: 24f8c9a9c2a2b1fdf54b514299ab5f97da7454304a922594924ae419f7c1344e
     home: https://docs.openstack.org/cinder/latest/
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/Cinder/OpenStack_Project_Cinder_vertical.png
     maintainers:
@@ -52,7 +52,7 @@ entries:
     version: 0.3.19
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.322005+02:00"
+    created: "2024-06-06T13:25:06.00271+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -73,13 +73,13 @@ entries:
   glance:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.337828+02:00"
+    created: "2024-06-06T13:25:06.012761+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Glance
-    digest: a0cb9103a90c469cce8d533163f6f0e0e8e7927be463c485fb9d106aafb6cc6b
+    digest: 76dd867048ee9fe0b4d2d3523e605dce66e82048d2660fee6ba19735b4211092
     home: https://docs.openstack.org/glance/latest/
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/Glance/OpenStack_Project_Glance_vertical.png
     maintainers:
@@ -93,7 +93,7 @@ entries:
     version: 0.4.19
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.332653+02:00"
+    created: "2024-06-06T13:25:06.00975+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -114,13 +114,13 @@ entries:
   heat:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.342758+02:00"
+    created: "2024-06-06T13:25:06.016457+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Heat
-    digest: c2a577a9699a12878691a33a3bb11e5911e53be44419b1cfa624c2d56a0a4058
+    digest: d93276f1c600e2c18557a7511f54219bc8311d82fe6c129809f002b046fbc1a5
     home: https://docs.openstack.org/heat/latest/
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/Heat/OpenStack_Project_Heat_vertical.png
     maintainers:
@@ -134,7 +134,7 @@ entries:
     version: 0.3.11
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.34836+02:00"
+    created: "2024-06-06T13:25:06.020041+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -155,9 +155,9 @@ entries:
   helm-toolkit:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.352183+02:00"
+    created: "2024-06-06T13:25:06.022388+02:00"
     description: OpenStack-Helm Helm-Toolkit
-    digest: e02eb2e5a1fe746ca513b7a20f09c2a1d9206665de6a473968fb554fc0e0b986
+    digest: edb221a5b3263ac72cc39f1960d87bbd4fbdedc3252a204af5611c744320ce8d
     home: https://docs.openstack.org/openstack-helm
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/OpenStack-Helm/OpenStack_Project_OpenStackHelm_vertical.png
     maintainers:
@@ -171,7 +171,7 @@ entries:
     version: 0.2.63
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.350119+02:00"
+    created: "2024-06-06T13:25:06.02121+02:00"
     description: OpenStack-Helm Helm-Toolkit
     digest: 7326740f7fdea3b96853d6de3eb335694c9aec912003ae3504537e11a2a56fbe
     home: https://docs.openstack.org/openstack-helm
@@ -188,13 +188,13 @@ entries:
   horizon:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.362499+02:00"
+    created: "2024-06-06T13:25:06.028571+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Horizon
-    digest: 4832c3c8c6f72095173f151134160dd2c4ed6e2b90c547f8687f83fbd787b454
+    digest: ad8fa6a84e3807766d36467b085e3a0dd6188c19e6eebd47ab304a61ad1e257f
     home: https://docs.openstack.org/horizon/latest/
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/Horizon/OpenStack_Project_Horizon_vertical.png
     maintainers:
@@ -208,7 +208,7 @@ entries:
     version: 0.3.19
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.357419+02:00"
+    created: "2024-06-06T13:25:06.025605+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -229,13 +229,13 @@ entries:
   keystone:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.367138+02:00"
+    created: "2024-06-06T13:25:06.031974+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Keystone
-    digest: c3f1414b4c2bae922561b2a7f7f3e8348ba6ead4a8bde30c4f5554cdc8486ece
+    digest: ee41b633ea30da1dc7cd503907c5e828ece68ae03486322f60fae00eb4318e4d
     home: https://docs.openstack.org/keystone/latest/
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/Keystone/OpenStack_Project_Keystone_vertical.png
     maintainers:
@@ -249,7 +249,7 @@ entries:
     version: 0.3.10
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.372555+02:00"
+    created: "2024-06-06T13:25:06.03505+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -270,13 +270,13 @@ entries:
   libvirt:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.378223+02:00"
+    created: "2024-06-06T13:25:06.038986+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm libvirt
-    digest: d843e9c640185abcd620e7b49dddbede2d18a5cd5b3e4a904d70e6444d740975
+    digest: c7d1ef7ce014ce2a3bb9b0b0eb237a60b2a5839b2268bc253a23e7ac4ebb8770
     home: https://libvirt.org
     maintainers:
     - name: OpenStack-Helm Authors
@@ -289,7 +289,7 @@ entries:
     version: 0.1.30
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.375381+02:00"
+    created: "2024-06-06T13:25:06.037116+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -309,13 +309,13 @@ entries:
   memcached:
   - apiVersion: v1
     appVersion: v1.5.5
-    created: "2024-04-12T18:36:59.381479+02:00"
+    created: "2024-06-06T13:25:06.040924+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Memcached
-    digest: 0a0c810d9f654d3984d4d5f75d897a9ef30a8c723c090d600ba86e16c220c1be
+    digest: 1c3cb4d198d9734387264f2c85e1466d9278b5d979cdad5d7a0643797a13b668
     home: https://github.com/memcached/memcached
     name: memcached
     urls:
@@ -324,13 +324,13 @@ entries:
   neutron:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.397317+02:00"
+    created: "2024-06-06T13:25:06.051877+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Neutron
-    digest: 17cd63b6c99a4f0434be1d81e7f802970fc89377c8a5a21489b1638b6910e242
+    digest: 260f6aeb543674900baa7b092810e51dabbf887100a57f7ea0659638768c87e3
     home: https://docs.openstack.org/neutron/latest/
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/Neutron/OpenStack_Project_Neutron_vertical.png
     maintainers:
@@ -344,7 +344,7 @@ entries:
     version: 0.3.38
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.389064+02:00"
+    created: "2024-06-06T13:25:06.046469+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -365,13 +365,13 @@ entries:
   nova:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.41613+02:00"
+    created: "2024-06-06T13:25:06.062737+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Nova
-    digest: 0e203ca1815c1e222d46f6d448419febff68878746cf6db53ad149861fc5cade
+    digest: 04444f5dfe80c5ca4d43c74eb88b7aaed2fe513a66337c599d5f1bf22f82b05b
     home: https://docs.openstack.org/nova/latest/
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/Nova/OpenStack_Project_Nova_vertical.png
     maintainers:
@@ -385,7 +385,7 @@ entries:
     version: 0.3.40
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.407034+02:00"
+    created: "2024-06-06T13:25:06.057373+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -403,16 +403,37 @@ entries:
     urls:
     - https://cloudification-io.github.io/nova-0.3.36.tgz
     version: 0.3.36
+  octavia:
+  - apiVersion: v1
+    appVersion: v1.0.0
+    created: "2024-06-06T13:25:06.065369+02:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://cloudification-io.github.io
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Octavia
+    digest: 6a6169d1f4fcde07cb85993f9a61dbd001a3b49bcd15d1c74d1f4e6b4c9ebc82
+    home: https://docs.openstack.org/octavia/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Octavia/OpenStack_Project_Octavia_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: octavia
+    sources:
+    - https://opendev.org/openstack/octavia
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://cloudification-io.github.io/octavia-0.2.12.tgz
+    version: 0.2.12
   openvswitch:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.42156+02:00"
+    created: "2024-06-06T13:25:06.068717+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm OpenVSwitch
-    digest: c18b2cf251c9fad34aee67cea24d487532d79aa8f5f3c7f1565726f7c03cbf0d
+    digest: 582ca0d73b1bb40e35a0af5e6292fef6288188daceab3ee9bb257aed162b64a3
     home: http://openvswitch.org
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/Neutron/OpenStack_Project_Neutron_vertical.png
     maintainers:
@@ -426,7 +447,7 @@ entries:
     version: 0.1.23
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.418866+02:00"
+    created: "2024-06-06T13:25:06.067006+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -447,13 +468,13 @@ entries:
   ovn:
   - apiVersion: v1
     appVersion: v23.3.0
-    created: "2024-04-12T18:36:59.427983+02:00"
+    created: "2024-06-06T13:25:06.072368+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm OVN
-    digest: 037c41b09cf383855c2749d755888d5e2542e45bc818070defe4bdbea28c312a
+    digest: 037a45951649f9168fdd16e0f734e4fa1190e22004a4f5540ff111949586682b
     home: https://www.ovn.org
     icon: https://www.ovn.org/images/ovn-logo.png
     maintainers:
@@ -467,7 +488,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: v23.3.0
-    created: "2024-04-12T18:36:59.424983+02:00"
+    created: "2024-06-06T13:25:06.070611+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -488,13 +509,13 @@ entries:
   placement:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.434922+02:00"
+    created: "2024-06-06T13:25:06.077087+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
       version: '>= 0.1.0'
     description: OpenStack-Helm Placement
-    digest: 727fbbe314bbb5e874e49a8333f92e60f0aa3497bc8a9b70effc851b70154f8a
+    digest: 31fd8dfa908a8f7957e5bce88bfdc77a23c872e5336b838063b07e47de8a5aba
     home: https://docs.openstack.org/placement/latest/
     icon: https://www.openstack.org/themes/openstack/images/project-mascots/Placement/OpenStack_Project_Placement_vertical.png
     maintainers:
@@ -508,7 +529,7 @@ entries:
     version: 0.3.12
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.431173+02:00"
+    created: "2024-06-06T13:25:06.074911+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -529,15 +550,15 @@ entries:
   prometheus-openstack-exporter:
   - apiVersion: v1
     appVersion: v1.6.0
-    created: "2024-04-12T18:36:59.437866+02:00"
-    digest: 471689171fe33243c05fe79a708be70c4a35f386912845107554d647a86668a6
+    created: "2024-06-06T13:25:06.078983+02:00"
+    digest: 3c4eaac5d43cba83fdaeaa5cbbda617116ee5c2057f4eb87bfb640f3e01b4c45
     name: prometheus-openstack-exporter
     urls:
     - https://cloudification-io.github.io/prometheus-openstack-exporter-0.4.3.tgz
     version: 0.4.3
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-04-12T18:36:59.437617+02:00"
+    created: "2024-06-06T13:25:06.07881+02:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -554,4 +575,4 @@ entries:
     urls:
     - https://cloudification-io.github.io/prometheus-openstack-exporter-0.1.7.tgz
     version: 0.1.7
-generated: "2024-04-12T18:36:59.30745+02:00"
+generated: "2024-06-06T13:25:05.993562+02:00"

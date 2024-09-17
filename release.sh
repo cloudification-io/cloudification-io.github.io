@@ -15,7 +15,8 @@ keystone
 nova
 placement
 neutron
-octavia"
+octavia
+masakari"
 
 for chart in $(echo ${openstack_infra_apps}); do
      echo "Build Chart for openstack-helm-infra/$chart"

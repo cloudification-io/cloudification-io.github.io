@@ -18,6 +18,9 @@ neutron
 octavia
 masakari"
 
+gardener_apps="cert-management
+external-dns-management"
+
 for chart in $(echo ${openstack_infra_apps}); do
      echo "Build Chart for openstack-helm-infra/$chart"
      helm package ./openstack-helm-infra/$chart --dependency-update
@@ -30,6 +33,13 @@ done
 
 echo "Building Chart for Openstack exporter"
 helm package ./openstack-exporter/charts/prometheus-openstack-exporter --dependency-update
+
+echo "Building Charts for Gardener"
+for chart in $(echo ${gardener_apps}); do
+     echo "Build Chart for gardener-$chart"
+     helm package ./gardener-$chart/charts/${chart} --dependency-update
+done
+
 
 helm repo index . --url https://cloudification-io.github.io
 

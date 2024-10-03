@@ -12,3 +12,9 @@
     path = openstack-exporter
     url = https://github.com/openstack-exporter/helm-charts.git
     branch = master
+[submodule "gardener-cert-management"]
+	path = gardener-cert-management
+	url = https://github.com/gardener/cert-management.git
+[submodule "gardener-external-dns-management"]
+	path = gardener-external-dns-management
+	url = https://github.com/gardener/external-dns-management.git

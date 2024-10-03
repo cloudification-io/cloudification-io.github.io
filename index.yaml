@@ -3,7 +3,7 @@ entries:
   ceph-rgw:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.759216318+04:00"
+    created: "2024-10-03T17:31:53.610703229+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -17,7 +17,7 @@ entries:
     version: 0.1.37
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.754534389+04:00"
+    created: "2024-10-03T17:31:53.606226752+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -31,7 +31,7 @@ entries:
     version: 0.1.34
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.750899513+04:00"
+    created: "2024-10-03T17:31:53.602540728+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -46,9 +46,9 @@ entries:
   cert-management:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2024-10-03T17:14:56.759665154+04:00"
+    created: "2024-10-03T17:31:53.611155503+04:00"
     description: A Helm chart for the cert-management component
-    digest: 15765598728fca1cb727610b71a9bdd60837dcd48858f63fcaacefd16b946306
+    digest: 1de465b453fc877422bd05b6712a2d3f3e6d921cecec18c1d8a18db6181087d4
     name: cert-management
     urls:
     - https://cloudification-io.github.io/cert-management-0.1.0.tgz
@@ -56,7 +56,7 @@ entries:
   cinder:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.782486247+04:00"
+    created: "2024-10-03T17:31:53.633429527+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -76,7 +76,7 @@ entries:
     version: 0.3.23
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.776019755+04:00"
+    created: "2024-10-03T17:31:53.62769613+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -96,7 +96,7 @@ entries:
     version: 0.3.22
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.770074798+04:00"
+    created: "2024-10-03T17:31:53.621937442+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -116,7 +116,7 @@ entries:
     version: 0.3.19
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.764655493+04:00"
+    created: "2024-10-03T17:31:53.617034539+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -137,9 +137,9 @@ entries:
   external-dns-management:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2024-10-03T17:14:56.783118273+04:00"
+    created: "2024-10-03T17:31:53.634047541+04:00"
     description: A Helm chart for the external-dns-management component
-    digest: 1a2d64ca4ad319413762b856a3a696a4f0aa04f17edcaea829b12fe08af8bb19
+    digest: a74b5b820d9f3f353238008a85ff339679e1c1d872735f6ec3cbf776829c3622
     name: external-dns-management
     urls:
     - https://cloudification-io.github.io/external-dns-management-0.1.0.tgz
@@ -147,7 +147,7 @@ entries:
   glance:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.801113226+04:00"
+    created: "2024-10-03T17:31:53.654104698+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -167,7 +167,7 @@ entries:
     version: 0.4.26
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.796879834+04:00"
+    created: "2024-10-03T17:31:53.648394952+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -187,7 +187,7 @@ entries:
     version: 0.4.25
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.792027574+04:00"
+    created: "2024-10-03T17:31:53.64404327+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -207,7 +207,7 @@ entries:
     version: 0.4.19
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.787195377+04:00"
+    created: "2024-10-03T17:31:53.638956207+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -228,7 +228,7 @@ entries:
   heat:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.816677209+04:00"
+    created: "2024-10-03T17:31:53.669324575+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -248,7 +248,7 @@ entries:
     version: 0.3.15
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.811925586+04:00"
+    created: "2024-10-03T17:31:53.664184+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -268,7 +268,7 @@ entries:
     version: 0.3.14
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.806754038+04:00"
+    created: "2024-10-03T17:31:53.658617796+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -288,7 +288,7 @@ entries:
     version: 0.3.11
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.821930546+04:00"
+    created: "2024-10-03T17:31:53.674506731+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -309,7 +309,7 @@ entries:
   helm-toolkit:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.829021755+04:00"
+    created: "2024-10-03T17:31:53.681588159+04:00"
     description: OpenStack-Helm Helm-Toolkit
     digest: 8b2926db526f82a781d000d1453576f157106bdfaac2ecc5cbc1efe7879a7ba2
     home: https://docs.openstack.org/openstack-helm
@@ -325,7 +325,7 @@ entries:
     version: 0.2.69
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.827398675+04:00"
+    created: "2024-10-03T17:31:53.679243114+04:00"
     description: OpenStack-Helm Helm-Toolkit
     digest: 75eeaa989d95786f9615b235d972451e1f777c03543494bfe27b69a7f1ac2641
     home: https://docs.openstack.org/openstack-helm
@@ -341,7 +341,7 @@ entries:
     version: 0.2.65
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.82576753+04:00"
+    created: "2024-10-03T17:31:53.677683019+04:00"
     description: OpenStack-Helm Helm-Toolkit
     digest: 3fe6924a7480dd0bc03d4bf8fb0644b0f86e1b1693e5394c782cb6a09af8ab85
     home: https://docs.openstack.org/openstack-helm
@@ -357,7 +357,7 @@ entries:
     version: 0.2.63
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.823445341+04:00"
+    created: "2024-10-03T17:31:53.676122682+04:00"
     description: OpenStack-Helm Helm-Toolkit
     digest: 7326740f7fdea3b96853d6de3eb335694c9aec912003ae3504537e11a2a56fbe
     home: https://docs.openstack.org/openstack-helm
@@ -374,7 +374,7 @@ entries:
   horizon:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.84701809+04:00"
+    created: "2024-10-03T17:31:53.699200899+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -394,7 +394,7 @@ entries:
     version: 0.3.27
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.842213551+04:00"
+    created: "2024-10-03T17:31:53.695258857+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -414,7 +414,7 @@ entries:
     version: 0.3.26
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.837642569+04:00"
+    created: "2024-10-03T17:31:53.690383314+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -434,7 +434,7 @@ entries:
     version: 0.3.19
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.833777431+04:00"
+    created: "2024-10-03T17:31:53.685583196+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -455,7 +455,7 @@ entries:
   keystone:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.862247817+04:00"
+    created: "2024-10-03T17:31:53.714316302+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -475,7 +475,7 @@ entries:
     version: 0.3.15
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.85698937+04:00"
+    created: "2024-10-03T17:31:53.708699722+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -495,7 +495,7 @@ entries:
     version: 0.3.13
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.851450454+04:00"
+    created: "2024-10-03T17:31:53.704505813+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -515,7 +515,7 @@ entries:
     version: 0.3.10
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.866531709+04:00"
+    created: "2024-10-03T17:31:53.719478513+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -536,7 +536,7 @@ entries:
   libvirt:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.874816322+04:00"
+    created: "2024-10-03T17:31:53.727448535+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -555,7 +555,7 @@ entries:
     version: 0.1.31
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.872243045+04:00"
+    created: "2024-10-03T17:31:53.725031014+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -574,7 +574,7 @@ entries:
     version: 0.1.30
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.869487088+04:00"
+    created: "2024-10-03T17:31:53.72190027+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -594,7 +594,7 @@ entries:
   masakari:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.878811325+04:00"
+    created: "2024-10-03T17:31:53.731270463+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -615,7 +615,7 @@ entries:
     version: 0.1.13
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.88198611+04:00"
+    created: "2024-10-03T17:31:53.73454+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -637,7 +637,7 @@ entries:
   memcached:
   - apiVersion: v1
     appVersion: v1.5.5
-    created: "2024-10-03T17:14:56.887043631+04:00"
+    created: "2024-10-03T17:31:53.739742398+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -651,7 +651,7 @@ entries:
     version: 0.1.14
   - apiVersion: v1
     appVersion: v1.5.5
-    created: "2024-10-03T17:14:56.884903751+04:00"
+    created: "2024-10-03T17:31:53.736766925+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -666,7 +666,7 @@ entries:
   neutron:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.920431704+04:00"
+    created: "2024-10-03T17:31:53.771419688+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -686,7 +686,7 @@ entries:
     version: 0.3.46
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.911801667+04:00"
+    created: "2024-10-03T17:31:53.762900693+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -706,7 +706,7 @@ entries:
     version: 0.3.45
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.902731693+04:00"
+    created: "2024-10-03T17:31:53.75492207+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -726,7 +726,7 @@ entries:
     version: 0.3.38
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.89456192+04:00"
+    created: "2024-10-03T17:31:53.747196217+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -744,10 +744,29 @@ entries:
     urls:
     - https://cloudification-io.github.io/neutron-0.3.33.tgz
     version: 0.3.33
+  nodepool-labels-operator:
+  - apiVersion: v2
+    appVersion: v0.2.0
+    created: "2024-10-03T17:31:53.772147862+04:00"
+    description: Banzai K8s Nodepool Labels Operator
+    digest: 37eeb66f3d790c3971532f535cfa2da90b346dd8280b27315e5096538b7f79d8
+    name: nodepool-labels-operator
+    urls:
+    - https://cloudification-io.github.io/nodepool-labels-operator-0.2.7.tgz
+    version: 0.2.7
+  - apiVersion: v2
+    appVersion: 0.1.2
+    created: "2024-10-03T17:31:53.771917677+04:00"
+    description: Banzai K8s Nodepool Labels Operator
+    digest: aac3b4cd39c8d9aa9a79eb68fe08b7a78b98b69b24885a30c2a5896016f0f462
+    name: nodepool-labels-operator
+    urls:
+    - https://cloudification-io.github.io/nodepool-labels-operator-0.2.6.tgz
+    version: 0.2.6
   nova:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.953151489+04:00"
+    created: "2024-10-03T17:31:53.80500593+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -767,7 +786,7 @@ entries:
     version: 0.3.43
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.943774988+04:00"
+    created: "2024-10-03T17:31:53.796795021+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -787,7 +806,7 @@ entries:
     version: 0.3.42
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.936497316+04:00"
+    created: "2024-10-03T17:31:53.788423512+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -807,7 +826,7 @@ entries:
     version: 0.3.40
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.928382896+04:00"
+    created: "2024-10-03T17:31:53.779464036+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -828,7 +847,7 @@ entries:
   octavia:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.964841432+04:00"
+    created: "2024-10-03T17:31:53.816004025+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -848,7 +867,7 @@ entries:
     version: 0.2.15
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.961342299+04:00"
+    created: "2024-10-03T17:31:53.812589586+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -868,7 +887,7 @@ entries:
     version: 0.2.14
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.956794014+04:00"
+    created: "2024-10-03T17:31:53.808400388+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -889,7 +908,7 @@ entries:
   openvswitch:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.974931973+04:00"
+    created: "2024-10-03T17:31:53.826995813+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -909,7 +928,7 @@ entries:
     version: 0.1.25
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.972287892+04:00"
+    created: "2024-10-03T17:31:53.823524958+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -929,7 +948,7 @@ entries:
     version: 0.1.24
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.970053922+04:00"
+    created: "2024-10-03T17:31:53.821318426+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -949,7 +968,7 @@ entries:
     version: 0.1.23
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.967194149+04:00"
+    created: "2024-10-03T17:31:53.818940116+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -970,7 +989,7 @@ entries:
   ovn:
   - apiVersion: v1
     appVersion: v23.3.0
-    created: "2024-10-03T17:14:56.980234597+04:00"
+    created: "2024-10-03T17:31:53.831845669+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -990,7 +1009,7 @@ entries:
     version: 0.1.12
   - apiVersion: v1
     appVersion: v23.3.0
-    created: "2024-10-03T17:14:56.977756532+04:00"
+    created: "2024-10-03T17:31:53.829401757+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -1010,7 +1029,7 @@ entries:
     version: 0.1.10
   - apiVersion: v1
     appVersion: v23.3.0
-    created: "2024-10-03T17:14:56.98575888+04:00"
+    created: "2024-10-03T17:31:53.837553094+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -1030,7 +1049,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: v23.3.0
-    created: "2024-10-03T17:14:56.983304041+04:00"
+    created: "2024-10-03T17:31:53.835023577+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -1051,7 +1070,7 @@ entries:
   placement:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.99872366+04:00"
+    created: "2024-10-03T17:31:53.850583661+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -1071,7 +1090,7 @@ entries:
     version: 0.3.16
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.995868698+04:00"
+    created: "2024-10-03T17:31:53.846959981+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -1091,7 +1110,7 @@ entries:
     version: 0.3.15
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.992202168+04:00"
+    created: "2024-10-03T17:31:53.844141837+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -1111,7 +1130,7 @@ entries:
     version: 0.3.12
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:56.989199063+04:00"
+    created: "2024-10-03T17:31:53.841285889+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -1132,15 +1151,15 @@ entries:
   prometheus-openstack-exporter:
   - apiVersion: v1
     appVersion: v1.6.0
-    created: "2024-10-03T17:14:57.001183476+04:00"
-    digest: ed716a269f5e44d8e7effb310234f6bb09db9ae02fabc68a6131e65dccc52b94
+    created: "2024-10-03T17:31:53.853102395+04:00"
+    digest: eba7a2076b252fe6c69ba7e020184e9c66562253125ae58717d2fb8f4750d530
     name: prometheus-openstack-exporter
     urls:
     - https://cloudification-io.github.io/prometheus-openstack-exporter-0.4.3.tgz
     version: 0.4.3
   - apiVersion: v1
     appVersion: v1.0.0
-    created: "2024-10-03T17:14:57.000961565+04:00"
+    created: "2024-10-03T17:31:53.852869745+04:00"
     dependencies:
     - name: helm-toolkit
       repository: https://cloudification-io.github.io
@@ -1157,4 +1176,4 @@ entries:
     urls:
     - https://cloudification-io.github.io/prometheus-openstack-exporter-0.1.7.tgz
     version: 0.1.7
-generated: "2024-10-03T17:14:56.745662566+04:00"
+generated: "2024-10-03T17:31:53.597519524+04:00"

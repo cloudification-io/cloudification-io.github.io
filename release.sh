@@ -40,6 +40,8 @@ for chart in $(echo ${gardener_apps}); do
      helm package ./gardener-$chart/charts/${chart} --dependency-update
 done
 
+echo "Building Chart for Node-label-operator"
+helm package ./nodepool-labels-operator/charts/nodepool-labels-operator/ --dependency-update
 
 helm repo index . --url https://cloudification-io.github.io
 

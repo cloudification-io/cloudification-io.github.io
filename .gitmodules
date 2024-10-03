@@ -18,3 +18,6 @@
 [submodule "gardener-external-dns-management"]
 	path = gardener-external-dns-management
 	url = https://github.com/gardener/external-dns-management.git
+[submodule "nodepool-labels-operator"]
+	path = nodepool-labels-operator
+	url = https://github.com/banzaicloud/nodepool-labels-operator.git

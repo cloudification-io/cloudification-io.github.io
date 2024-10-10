@@ -43,6 +43,9 @@ done
 echo "Building Chart for Node-label-operator"
 helm package ./nodepool-labels-operator/charts/nodepool-labels-operator/ --dependency-update
 
+echo "Building Gardener charts"
+bash build-gardener-charts.sh
+
 helm repo index . --url https://cloudification-io.github.io
 
 sed -i 's/file:.*helm-toolkit/https:\/\/cloudification-io.github.io/g' index.yaml

@@ -21,3 +21,21 @@
 [submodule "nodepool-labels-operator"]
 	path = nodepool-labels-operator
 	url = https://github.com/banzaicloud/nodepool-labels-operator.git
+[submodule "gardener-extension-networking-cilium"]
+	path = gardener-extension-networking-cilium
+	url = https://github.com/gardener/gardener-extension-networking-cilium.git
+[submodule "gardener-extension-networking-calico"]
+	path = gardener-extension-networking-calico
+	url = https://github.com/gardener/gardener-extension-networking-calico.git
+[submodule "gardener-extension-provider-dns-cloudflare"]
+	path = gardener-extension-provider-dns-cloudflare
+	url = https://github.com/schrodit/gardener-extension-provider-dns-cloudflare.git
+[submodule "gardener-extension-provider-openstack"]
+	path = gardener-extension-provider-openstack
+	url = https://github.com/gardener/gardener-extension-provider-openstack.git
+[submodule "gardener-extension-os-gardenlinux"]
+	path = gardener-extension-os-gardenlinux
+	url = https://github.com/gardener/gardener-extension-os-gardenlinux.git
+[submodule "gardener-extension-os-ubuntu"]
+	path = gardener-extension-os-ubuntu
+	url = https://github.com/gardener/gardener-extension-os-ubuntu.git

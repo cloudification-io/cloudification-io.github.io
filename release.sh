@@ -7,7 +7,9 @@ libvirt
 helm-toolkit
 ceph-rgw"
 
-openstack_apps="cinder
+openstack_apps="barbican
+cinder
+designate
 glance
 heat
 horizon
@@ -16,7 +18,8 @@ nova
 placement
 neutron
 octavia
-masakari"
+masakari
+manila"
 
 gardener_apps="cert-management
 external-dns-management"

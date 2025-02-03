@@ -9,6 +9,7 @@ ceph-rgw"
 
 openstack_apps="barbican
 cinder
+ceilometer
 designate
 glance
 heat

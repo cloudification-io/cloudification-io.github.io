@@ -5,7 +5,8 @@ openvswitch
 ovn
 libvirt
 helm-toolkit
-ceph-rgw"
+ceph-rgw
+gnocchi"
 
 openstack_apps="barbican
 cinder

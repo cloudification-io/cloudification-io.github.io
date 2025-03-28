@@ -1,5 +1,7 @@
 #!/bin/bash
 
+c12n_helm_tmp="cloudkitty"
+
 openstack_infra_apps="memcached
 openvswitch
 ovn
@@ -25,6 +27,11 @@ manila"
 
 gardener_apps="cert-management
 external-dns-management"
+
+for chart in $(echo ${c12n_helm_tmp}); do
+     echo "Build Chart for c12n-os-helm/$chart"
+     helm package ./c12n-os-helm/$chart --dependency-update
+done
 
 for chart in $(echo ${openstack_infra_apps}); do
      echo "Build Chart for openstack-helm-infra/$chart"

@@ -39,3 +39,6 @@
 [submodule "gardener-extension-os-ubuntu"]
 	path = gardener-extension-os-ubuntu
 	url = https://github.com/gardener/gardener-extension-os-ubuntu.git
+[submodule "c12n-os-helm"]
+	path = c12n-os-helm
+	url = git@github.com:cloudification-io/openstack-helm.git

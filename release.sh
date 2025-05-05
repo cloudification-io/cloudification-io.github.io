@@ -2,14 +2,6 @@
 
 c12n_helm_tmp="cloudkitty"
 
-openstack_infra_apps="memcached
-openvswitch
-ovn
-libvirt
-helm-toolkit
-ceph-rgw
-gnocchi"
-
 openstack_apps="barbican
 cinder
 ceilometer
@@ -23,7 +15,14 @@ placement
 neutron
 octavia
 masakari
-manila"
+manila
+memcached
+openvswitch
+ovn
+libvirt
+helm-toolkit
+ceph-rgw
+gnocchi"
 
 gardener_apps="cert-management
 external-dns-management"
@@ -31,11 +30,6 @@ external-dns-management"
 for chart in $(echo ${c12n_helm_tmp}); do
      echo "Build Chart for c12n-os-helm/$chart"
      helm package ./c12n-os-helm/$chart --dependency-update
-done
-
-for chart in $(echo ${openstack_infra_apps}); do
-     echo "Build Chart for openstack-helm-infra/$chart"
-     helm package ./openstack-helm-infra/$chart --dependency-update
 done
 
 for chart in $(echo ${openstack_apps}); do

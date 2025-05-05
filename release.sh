@@ -27,10 +27,10 @@ gnocchi"
 gardener_apps="cert-management
 external-dns-management"
 
-for chart in $(echo ${c12n_helm_tmp}); do
-     echo "Build Chart for c12n-os-helm/$chart"
-     helm package ./c12n-os-helm/$chart --dependency-update
-done
+# for chart in $(echo ${c12n_helm_tmp}); do
+#      echo "Build Chart for c12n-os-helm/$chart"
+#      helm package ./c12n-os-helm/$chart --dependency-update
+# done
 
 for chart in $(echo ${openstack_apps}); do
      echo "Build Chart for openstack-helm/$chart"

@@ -2281,4 +2281,25 @@ entries:
     urls:
     - https://cloudification-io.github.io/prometheus-openstack-exporter-0.1.7.tgz
     version: 0.1.7
+  skyline:
+  - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2026-03-11T21:09:04.4944959+01:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://cloudification-io.github.io
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Skyline
+    digest: a7ba541e9a404cc971a172f53a9f71119e9920953dfcfbc5fc1f0abadd320a8a
+    home: https://docs.openstack.org/skyline-apiserver/latest/
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: skyline
+    sources:
+    - https://opendev.org/openstack/skyline-apiserver
+    - https://opendev.org/openstack/skyline-console
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://cloudification-io.github.io/skyline-2025.2.0.tgz
+    version: 2025.2.0
 generated: "2025-05-05T12:18:15.316494242+04:00"

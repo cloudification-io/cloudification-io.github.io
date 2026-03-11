@@ -9,6 +9,7 @@ designate
 glance
 heat
 horizon
+skyline
 keystone
 nova
 placement

@@ -1,0 +1,30 @@
+defaults:
+  repo: https://github.com/openstack/openstack-helm.git
+  commit: 1fa537cf1b818fd168161f0b4ea2dc8ede05f8a2  # 2025.1.0 + 12 commits
+  submodule: openstack-helm
+
+charts:
+  helm-toolkit: {}
+  barbican: {}
+  ceilometer: {}
+  ceph-rgw: {}
+  cinder: {}
+  cloudkitty:
+    commit: 3d3537662df9d25f0cda6aa0b8f907c44209827b
+  designate: {}
+  glance: {}
+  gnocchi: {}
+  heat: {}
+  horizon: {}
+  keystone: {}
+  libvirt: {}
+  manila: {}
+  masakari: {}
+  memcached: {}
+  neutron: {}
+  nova: {}
+  octavia: {}
+  openvswitch: {}
+  ovn: {}
+  placement: {}
+  skyline: {}

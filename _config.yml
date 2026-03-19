@@ -1,7 +1,9 @@
 exclude:
+- .chart-cache
 - openstack-helm
-- openstack-helm-infra
 - openstack-exporter
 - release.sh
+- charts.yaml
+- build-gardener-charts.sh
 - README.md
 - .gitmodules

@@ -27,4 +27,5 @@ charts:
   openvswitch: {}
   ovn: {}
   placement: {}
+  redis: {}
   skyline: {}

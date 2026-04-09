@@ -2301,6 +2301,21 @@ entries:
     urls:
     - https://cloudification-io.github.io/prometheus-openstack-exporter-0.1.7.tgz
     version: 0.1.7
+  redis:
+  - apiVersion: v2
+    appVersion: v4.0.1
+    created: "2026-04-09T17:20:50.579051+03:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://cloudification-io.github.io
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Redis
+    digest: 7a8199a38a6930514639572ff7f7b40b7a7d4cf0b6a35c945ab307a14e699f70
+    home: https://github.com/redis/redis
+    name: redis
+    urls:
+    - https://cloudification-io.github.io/redis-2025.1.0.tgz
+    version: 2025.1.0
   skyline:
   - apiVersion: v2
     appVersion: v1.0.0

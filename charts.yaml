@@ -25,7 +25,8 @@ charts:
   nova: {}
   octavia: {}
   openvswitch: {}
-  ovn: {}
+  ovn:
+    commit: c665eedfa3ae1b76a7e8438fffcb62aefaa30a46  # tag 2026.1.0: volume.ovn_ovsdb_*.path (db on PVC)
   placement: {}
   redis: {}
   skyline: {}

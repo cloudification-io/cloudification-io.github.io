@@ -1994,6 +1994,26 @@ entries:
   ovn:
   - apiVersion: v2
     appVersion: v23.3.0
+    created: "2026-07-10T19:24:34.409991+03:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://cloudification-io.github.io
+      version: '>= 0.1.0'
+    description: OpenStack-Helm OVN
+    digest: 19469a9990d4f1c1e79211e469a444f8662e7161131b510f011e606a66f9e726
+    home: https://www.ovn.org
+    icon: https://www.ovn.org/images/ovn-logo.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: ovn
+    sources:
+    - https://github.com/ovn-org/ovn
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://cloudification-io.github.io/ovn-2026.1.0.tgz
+    version: 2026.1.0
+  - apiVersion: v2
+    appVersion: v23.3.0
     created: "2025-05-05T12:18:16.051798135+04:00"
     dependencies:
     - name: helm-toolkit

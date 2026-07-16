@@ -318,6 +318,26 @@ entries:
     version: 0.3.16
   cloudkitty:
   - apiVersion: v2
+    appVersion: 24.0.0
+    created: "2026-07-16T15:02:20.275445+03:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://cloudification-io.github.io
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Cloudkitty
+    digest: 50e7ca679951cdc639003f6a6427a67b62a39533700df59f390d50ea19553261
+    home: https://docs.openstack.org/cloudkitty/latest/
+    icon: https://opendev.org/openstack/cloudkitty/media/branch/master/doc/source/images/cloudkitty-logo.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: cloudkitty
+    sources:
+    - https://opendev.org/openstack/cloudkitty
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://cloudification-io.github.io/cloudkitty-2026.1.0.tgz
+    version: 2026.1.0
+  - apiVersion: v2
     appVersion: v1.0.0
     created: "2026-03-13T20:24:42.279734+02:00"
     dependencies:

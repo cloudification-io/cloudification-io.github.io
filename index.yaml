@@ -43,6 +43,25 @@ entries:
     version: 2024.2.0
   ceilometer:
   - apiVersion: v2
+    appVersion: 26.0.0
+    created: "2026-07-17T13:02:53.370323+03:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://cloudification-io.github.io
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Ceilometer
+    digest: c1bc2608e61d66882f73155af0f4bebb6d8e579fac35333da4a468403c7809d6
+    home: https://docs.openstack.org/ceilometer/latest/
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: ceilometer
+    sources:
+    - https://opendev.org/openstack/ceilometer
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://cloudification-io.github.io/ceilometer-2026.1.0.tgz
+    version: 2026.1.0
+  - apiVersion: v2
     appVersion: v1.0.0
     created: "2025-05-05T12:18:15.356207295+04:00"
     dependencies:

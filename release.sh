@@ -4,19 +4,27 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CHARTS_YAML="${SCRIPT_DIR}/charts.yaml"
 CACHE_DIR="${SCRIPT_DIR}/.chart-cache"
+REPO_URL="https://cloudification-io.github.io"
+EXTRA_TARGETS=(openstack-exporter gardener-cert-management gardener-external-dns-management nodepool-labels-operator gardener-all)
 
 cd "${SCRIPT_DIR}"
 
-SELECTED_CHARTS=()
-if [ $# -gt 0 ]; then
-    SELECTED_CHARTS=("${@}")
-fi
+usage() {
+    cat >&2 <<USAGE
+Usage:
+  $0 <release> [chart...]   build openstack-helm charts of a release from charts.yaml
+  $0 <target...>            build non-OpenStack charts: ${EXTRA_TARGETS[*]}
 
-should_build() {
-    if [ ${#SELECTED_CHARTS[@]} -eq 0 ]; then return 0; fi
-    for s in "${SELECTED_CHARTS[@]}"; do [ "$s" = "$1" ] && return 0; done
-    return 1
+Releases: $(yq '.releases | keys | join(" ")' "$CHARTS_YAML")
+USAGE
+    exit 1
 }
+
+[ $# -gt 0 ] || usage
+
+export BUILD_DIR
+BUILD_DIR=$(mktemp -d)
+trap 'rm -rf "$BUILD_DIR"' EXIT
 
 ensure_checkout() {
     local repo="$1" commit="$2"
@@ -41,85 +49,89 @@ ensure_checkout() {
     echo "$checkout_dir"
 }
 
-resolve_field() {
-    local val
-    val=$(yq ".charts.\"$1\".$2 // \"\"" "$CHARTS_YAML")
-    echo "${val:-$3}"
+in_list() {
+    local needle="$1" item; shift
+    for item in "$@"; do [ "$item" = "$needle" ] && return 0; done
+    return 1
 }
 
-DEFAULT_REPO=$(yq '.defaults.repo' "$CHARTS_YAML")
-DEFAULT_COMMIT=$(yq '.defaults.commit' "$CHARTS_YAML")
-DEFAULT_SUBMODULE=$(yq '.defaults.submodule' "$CHARTS_YAML")
+build_release() {
+    local release="$1"; shift
+    local default_repo default_commit
+    default_repo=$(yq ".releases.\"${release}\".repo // .repo" "$CHARTS_YAML")
+    default_commit=$(yq -e ".releases.\"${release}\".commit" "$CHARTS_YAML" 2>/dev/null) \
+        || { echo "Release ${release} has no commit in charts.yaml" >&2; exit 1; }
 
-mapfile -t ALL_CHART_NAMES < <(yq '.charts | keys | .[]' "$CHARTS_YAML")
-
-needs_submodule=false
-for chart_name in "${ALL_CHART_NAMES[@]}"; do
-    should_build "$chart_name" || continue
-    commit=$(resolve_field "$chart_name" "commit" "")
-    if [ -z "$commit" ]; then
-        needs_submodule=true
-        break
-    fi
-done
-
-if $needs_submodule; then
-    echo "Syncing submodule ${DEFAULT_SUBMODULE} to ${DEFAULT_COMMIT:0:12} ..."
-    git -C "${SCRIPT_DIR}/${DEFAULT_SUBMODULE}" fetch origin
-    git -C "${SCRIPT_DIR}/${DEFAULT_SUBMODULE}" checkout --detach "$DEFAULT_COMMIT"
-fi
-
-declare -A OVERRIDE_GROUPS
-
-for chart_name in "${ALL_CHART_NAMES[@]}"; do
-    should_build "$chart_name" || continue
-
-    commit=$(resolve_field "$chart_name" "commit" "")
-    path=$(resolve_field "$chart_name" "path" "$chart_name")
-
-    if [ -z "$commit" ]; then
-        echo "Building chart: ${chart_name} (from submodule)"
-        helm package "${SCRIPT_DIR}/${DEFAULT_SUBMODULE}/${path}" \
-            --dependency-update --destination "${SCRIPT_DIR}"
-    else
-        repo=$(resolve_field "$chart_name" "repo" "$DEFAULT_REPO")
-        OVERRIDE_GROUPS["${repo}|${commit}"]+="${chart_name}:${path} "
-    fi
-done
-
-for key in "${!OVERRIDE_GROUPS[@]}"; do
-    IFS='|' read -r repo commit <<< "$key"
-    checkout_dir=$(ensure_checkout "$repo" "$commit")
-
-    for entry in ${OVERRIDE_GROUPS["$key"]}; do
-        IFS=':' read -r chart_name chart_path <<< "$entry"
-        echo "Building chart: ${chart_name} (from ${commit:0:12})"
-        helm package "${checkout_dir}/${chart_path}" \
-            --dependency-update --destination "${SCRIPT_DIR}"
+    local name repo commit path
+    for name in "$@"; do
+        yq -e ".releases.\"${release}\".charts | has(\"${name}\")" "$CHARTS_YAML" >/dev/null 2>&1 \
+            || { echo "Unknown chart '${name}' in release ${release}" >&2; exit 1; }
     done
-done
 
-if should_build "openstack-exporter"; then
-    echo "Building Chart for openstack-exporter"
-    helm package ./openstack-exporter/charts/prometheus-openstack-exporter --dependency-update
+    local -A groups
+    while IFS=';' read -r name repo commit path; do
+        if [ $# -gt 0 ] && ! in_list "$name" "$@"; then continue; fi
+        groups["${repo:-$default_repo}|${commit:-$default_commit}"]+="${name};${path}"$'\n'
+    done < <(yq -r ".releases.\"${release}\".charts | to_entries[] | [.key, (.value.repo // \"\"), (.value.commit // \"\"), (.value.path // .key)] | join(\";\")" "$CHARTS_YAML")
+
+    local key checkout_dir
+    for key in "${!groups[@]}"; do
+        IFS='|' read -r repo commit <<< "$key"
+        checkout_dir=$(ensure_checkout "$repo" "$commit")
+        while IFS=';' read -r name path; do
+            [ -n "$name" ] || continue
+            echo "Building chart: ${name} ${release} (from ${commit:0:12})"
+            git -C "$checkout_dir" clean -fdxq
+            helm package "${checkout_dir}/${path}" \
+                --dependency-update --destination "$BUILD_DIR"
+        done <<< "${groups[$key]}"
+    done
+}
+
+build_extra() {
+    local target chart
+    for target in "$@"; do
+        in_list "$target" "${EXTRA_TARGETS[@]}" \
+            || { echo "Unknown release or target '${target}'" >&2; usage; }
+    done
+    for target in "$@"; do
+        case "$target" in
+            openstack-exporter)
+                echo "Building chart: prometheus-openstack-exporter"
+                helm package ./openstack-exporter/charts/prometheus-openstack-exporter \
+                    --dependency-update --destination "$BUILD_DIR" ;;
+            gardener-cert-management|gardener-external-dns-management)
+                chart="${target#gardener-}"
+                echo "Building chart: ${chart}"
+                helm package "./gardener-${chart}/charts/${chart}" \
+                    --dependency-update --destination "$BUILD_DIR" ;;
+            nodepool-labels-operator)
+                echo "Building chart: nodepool-labels-operator"
+                helm package ./nodepool-labels-operator/charts/nodepool-labels-operator/ \
+                    --dependency-update --destination "$BUILD_DIR" ;;
+            gardener-all)
+                echo "Building gardener charts"
+                bash build-gardener-charts.sh ;;
+        esac
+    done
+}
+
+if yq -e ".releases | has(\"$1\")" "$CHARTS_YAML" >/dev/null 2>&1; then
+    release="$1"; shift
+    build_release "$release" "$@"
+else
+    build_extra "$@"
 fi
 
-for chart in cert-management external-dns-management; do
-    if should_build "gardener-$chart"; then
-        echo "Build Chart for gardener-$chart"
-        helm package ./gardener-$chart/charts/${chart} --dependency-update
-    fi
-done
-
-if should_build "nodepool-labels-operator"; then
-    echo "Building Chart for Node-label-operator"
-    helm package ./nodepool-labels-operator/charts/nodepool-labels-operator/ --dependency-update
+shopt -s nullglob
+built=("$BUILD_DIR"/*.tgz)
+if [ ${#built[@]} -eq 0 ]; then
+    echo "Nothing was packaged; index.yaml left untouched"
+    exit 0
 fi
 
-if should_build "gardener-all"; then
-    echo "Building Gardener charts"
-    bash build-gardener-charts.sh
-fi
-
-helm repo index . --url https://cloudification-io.github.io --merge index.yaml
-sed -i 's/file:.*helm-toolkit/https:\/\/cloudification-io.github.io/g' index.yaml
+helm repo index "$BUILD_DIR" --url "$REPO_URL" --merge "${SCRIPT_DIR}/index.yaml"
+sed -i "s#file:.*helm-toolkit#${REPO_URL}#g" "${BUILD_DIR}/index.yaml"
+mv "${built[@]}" "${SCRIPT_DIR}/"
+mv "${BUILD_DIR}/index.yaml" "${SCRIPT_DIR}/index.yaml"
+echo "Indexed ${#built[@]} chart(s) into index.yaml"

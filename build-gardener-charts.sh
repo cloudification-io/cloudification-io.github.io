@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 GARDEN_REPOS="https://github.com/gardener/gardener-extension-networking-cilium.git
 https://github.com/gardener/gardener-extension-networking-calico.git
@@ -46,6 +47,6 @@ fetch_latest_tags
 #     done
 # }
 
-helm package ./gardener-extension-networking-cilium/charts/gardener-extension-admission-cilium/ --dependency-update
-helm package ./gardener-extension-networking-calico/charts/gardener-extension-admission-calico/ --dependency-update
-helm package ./gardener-extension-provider-openstack/charts/gardener-extension-admission-openstack/ --dependency-update
+helm package ./gardener-extension-networking-cilium/charts/gardener-extension-admission-cilium/ --dependency-update --destination "${BUILD_DIR:-.}"
+helm package ./gardener-extension-networking-calico/charts/gardener-extension-admission-calico/ --dependency-update --destination "${BUILD_DIR:-.}"
+helm package ./gardener-extension-provider-openstack/charts/gardener-extension-admission-openstack/ --dependency-update --destination "${BUILD_DIR:-.}"

@@ -1,8 +1,3 @@
-[submodule "openstack-helm"]
-	path = openstack-helm
-	url = https://github.com/openstack/openstack-helm.git
-    branch = master
-
 [submodule "openstack-exporter"]
     path = openstack-exporter
     url = https://github.com/openstack-exporter/helm-charts.git

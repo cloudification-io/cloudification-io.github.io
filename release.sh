@@ -27,11 +27,16 @@ BUILD_DIR=$(mktemp -d)
 trap 'rm -rf "$BUILD_DIR"' EXIT
 
 ensure_checkout() {
-    local repo="$1" commit="$2"
+    local repo="$1" commit="$2" patches="${3:-}"
     local repo_hash
     repo_hash=$(printf '%s' "$repo" | md5sum | cut -d' ' -f1)
     local clone_dir="${CACHE_DIR}/repos/${repo_hash}"
     local checkout_dir="${CACHE_DIR}/checkouts/${repo_hash}/${commit}"
+    local patch_files=()
+    if [ -n "$patches" ]; then
+        patch_files=("${SCRIPT_DIR}/${patches}"/*.patch)
+        checkout_dir="${checkout_dir}+$(cat "${patch_files[@]}" | md5sum | cut -c1-8)"
+    fi
 
     if [ -f "$checkout_dir/.git" ]; then echo "$checkout_dir"; return; fi
 
@@ -46,6 +51,16 @@ ensure_checkout() {
     mkdir -p "${CACHE_DIR}/checkouts/${repo_hash}"
     git -C "$clone_dir" worktree prune
     git -C "$clone_dir" worktree add --detach "$checkout_dir" "$commit" >&2
+    if [ ${#patch_files[@]} -gt 0 ]; then
+        if ! git -C "$checkout_dir" -c user.name=release -c user.email=release@localhost \
+            -c commit.gpgsign=false -c core.hooksPath=/dev/null \
+            am --3way "${patch_files[@]}" >&2; then
+            git -C "$checkout_dir" am --abort >&2 || true
+            git -C "$clone_dir" worktree remove --force "$checkout_dir" >&2
+            echo "Patches in ${patches} do not apply on ${commit:0:12}" >&2
+            exit 1
+        fi
+    fi
     echo "$checkout_dir"
 }
 
@@ -55,6 +70,12 @@ in_list() {
     return 1
 }
 
+chart_value() {
+    local release="$1" name="$2" key="$3" default="${4:-}" value
+    value=$(yq -r ".releases.\"${release}\".charts.\"${name}\".${key} // \"\"" "$CHARTS_YAML")
+    echo "${value:-$default}"
+}
+
 build_release() {
     local release="$1"; shift
     local default_repo default_commit
@@ -62,30 +83,26 @@ build_release() {
     default_commit=$(yq -e ".releases.\"${release}\".commit" "$CHARTS_YAML" 2>/dev/null) \
         || { echo "Release ${release} has no commit in charts.yaml" >&2; exit 1; }
 
-    local name repo commit path
+    local name
     for name in "$@"; do
         yq -e ".releases.\"${release}\".charts | has(\"${name}\")" "$CHARTS_YAML" >/dev/null 2>&1 \
             || { echo "Unknown chart '${name}' in release ${release}" >&2; exit 1; }
     done
 
-    local -A groups
-    while IFS=';' read -r name repo commit path; do
+    local repo commit path version patches checkout_dir
+    while IFS= read -r name; do
         if [ $# -gt 0 ] && ! in_list "$name" "$@"; then continue; fi
-        groups["${repo:-$default_repo}|${commit:-$default_commit}"]+="${name};${path}"$'\n'
-    done < <(yq -r ".releases.\"${release}\".charts | to_entries[] | [.key, (.value.repo // \"\"), (.value.commit // \"\"), (.value.path // .key)] | join(\";\")" "$CHARTS_YAML")
-
-    local key checkout_dir
-    for key in "${!groups[@]}"; do
-        IFS='|' read -r repo commit <<< "$key"
-        checkout_dir=$(ensure_checkout "$repo" "$commit")
-        while IFS=';' read -r name path; do
-            [ -n "$name" ] || continue
-            echo "Building chart: ${name} ${release} (from ${commit:0:12})"
-            git -C "$checkout_dir" clean -fdxq
-            helm package "${checkout_dir}/${path}" \
-                --dependency-update --destination "$BUILD_DIR"
-        done <<< "${groups[$key]}"
-    done
+        repo=$(chart_value "$release" "$name" repo "$default_repo")
+        commit=$(chart_value "$release" "$name" commit "$default_commit")
+        path=$(chart_value "$release" "$name" path "$name")
+        version=$(chart_value "$release" "$name" version)
+        patches=$(chart_value "$release" "$name" patches)
+        checkout_dir=$(ensure_checkout "$repo" "$commit" "$patches")
+        echo "Building chart: ${name} ${release} (from ${commit:0:12}${patches:+ + ${patches}})"
+        git -C "$checkout_dir" clean -fdxq
+        helm package "${checkout_dir}/${path}" \
+            --dependency-update --destination "$BUILD_DIR" ${version:+--version "$version"}
+    done < <(yq -r ".releases.\"${release}\".charts | keys | .[]" "$CHARTS_YAML")
 }
 
 build_extra() {

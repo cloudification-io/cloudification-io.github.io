@@ -46,7 +46,11 @@ releases:
       manila: {}
       masakari: {}
       memcached: {}
-      neutron: {}
+      neutron:
+        commit: 4df43bd83f88eae0f449c288bbf3993ea0e6a120  # adds neutron-ovn-agent, 25 commits after 2026.1.0
+        version: 2026.1.1
+        # upstream 955ae97036, e118d9349b, ba117e4869; 2026.1.N is the local series, skip N if upstream ever tags it
+        patches: patches/neutron-2026.1.1
       nova: {}
       octavia: {}
       openvswitch: {}

@@ -1774,6 +1774,26 @@ entries:
   neutron:
   - apiVersion: v2
     appVersion: 28.0.0
+    created: "2026-11-03T16:56:21.448967+02:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://cloudification-io.github.io
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Neutron
+    digest: 6945dde3751b2b9010f47bceae845fc240fcf41576e4c51161d896dbb788a606
+    home: https://docs.openstack.org/neutron/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Neutron/OpenStack_Project_Neutron_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: neutron
+    sources:
+    - https://opendev.org/openstack/neutron
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://cloudification-io.github.io/neutron-2026.1.1.tgz
+    version: 2026.1.1
+  - apiVersion: v2
+    appVersion: 28.0.0
     created: "2026-10-14T21:19:18.43014+03:00"
     dependencies:
     - name: helm-toolkit
@@ -2794,4 +2814,4 @@ entries:
     urls:
     - https://cloudification-io.github.io/skyline-2025.2.0.tgz
     version: 2025.2.0
-generated: "2026-10-14T21:19:18.397015+03:00"
+generated: "2026-11-03T16:56:21.444265+02:00"

@@ -5,13 +5,18 @@
 OpenStack chart sources are defined in `charts.yaml` as named releases (`2025.1`,
 `2026.1`, ...). Each release pins one upstream commit and lists the charts built from
 it. A chart entry can override `repo`, `commit` and `path` (directory inside the
-repository, defaults to the chart name).
+repository, defaults to the chart name), `version` (passed to `helm package --version`)
+and `patches` (a directory of `git format-patch` files applied on top of `commit` with
+`git am --3way`, for example `patches/neutron-2026.1.1`).
 
 Resolution order: `chart.repo`, then `release.repo`, then the top-level `repo`;
 `chart.commit`, then `release.commit`.
 
 Sources are cloned into `.chart-cache/` and every commit gets its own worktree there,
 so several releases can be built side by side without touching the working tree.
+A chart with `patches` uses the worktree `<commit>+<8 hex of the md5 of the patch files>`,
+so editing a patch rebuilds it. A patch that does not apply removes its worktree and
+stops the build.
 
 Packages are written to a scratch directory first and only that directory is indexed,
 merged into the existing `index.yaml`. Entries for charts that were not rebuilt keep

@@ -1,0 +1,103 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Kyuyeong Lee <kyu0.lee@samsung.com>
+Date: Fri, 4 Sep 2026 18:16:43 +0900
+Subject: [PATCH 2/3] neutron: fix the health probe for the OVN agent
+
+health-probe.py picks its check from the configuration file name it is
+given, and the ovn-agent daemonset passes ovn_agent.ini, which matched
+neither sriov_agent.ini nor metadata_agent.ini. The OVN agent therefore
+took the RPC branch, which does not apply to it: neutron-ovn-agent runs
+no RPC server and consumes no per-agent queue, and reports its liveness
+by writing neutron:ovn-neutron-agent-sb-cfg into Chassis_Private in the
+OVN southbound database.
+
+The result was not a failing probe but one that never checked anything.
+Unlike the dhcp, l3 and l2gw daemonsets, the ovn-agent probe passes no
+--agent-queue-name, so test_rpc_liveness() returned success at its
+"message bus URL and agent queue name are required" guard. Both probes
+are enabled by default, so an agent that stopped answering kept its pod
+Ready and was never restarted.
+
+Route ovn_agent.ini to test_socket_liveness(), the check
+ovn_metadata_agent.ini already gets, and reorder the branches so the
+socket case is matched rather than inferred from the absence of the
+others. No configuration change is needed: the check reads
+metadata_proxy_socket, which conf.ovn_agent already sets.
+
+This assumes the metadata extension is enabled, which is the chart
+default. Deployments running the OVN agent with other extensions only
+have no metadata proxy to probe and should disable the probes under
+pod.probes.ovn_agent.
+
+The daemonset dates from I3f66ff851e631db3d6de303664564e8942a66cdc,
+which reused health-probe.py without adapting it. It matters now that
+neutron-ovn-metadata-agent is deprecated since 2025.2 and marked for
+removal in 2026.2, so deployments moving to the OVN agent would
+otherwise lose the health check the metadata agent had.
+
+Change-Id: I7d940919531125e2806b18fcb6cfe245d6b31450
+Signed-off-by: Kyuyeong Lee <kyu0.lee@samsung.com>
+(cherry picked from commit e118d9349b8a380d2e1f15b415063800b557290a)
+---
+ neutron/templates/bin/_health-probe.py.tpl    | 13 +++++++++----
+ ...n-agent-health-probe-aad5b735bf150944.yaml | 19 +++++++++++++++++++
+ 2 files changed, 28 insertions(+), 4 deletions(-)
+ create mode 100644 releasenotes/notes/neutron-ovn-agent-health-probe-aad5b735bf150944.yaml
+
+diff --git a/neutron/templates/bin/_health-probe.py.tpl b/neutron/templates/bin/_health-probe.py.tpl
+index 673261bb0..7774e3ad7 100644
+--- a/neutron/templates/bin/_health-probe.py.tpl
++++ b/neutron/templates/bin/_health-probe.py.tpl
+@@ -33,6 +33,10 @@ Usage example for Neutron L3 agent:
+ Usage example for Neutron metadata agent:
+ # python health-probe.py --config-file /etc/neutron/neutron.conf \
+ #  --config-file /etc/neutron/metadata_agent.ini
++
++Usage example for the OVN agent with the metadata extension:
++# python health-probe.py --config-file /etc/neutron/neutron.conf \
++#  --config-file /etc/neutron/ovn_agent.ini
+ """
+ 
+ import httplib2
+@@ -328,11 +332,12 @@ if __name__ == "__main__":
+     with open(pidfile, 'w') as f:
+         json.dump(data, f)
+ 
+-    if "sriov_agent.ini" in ','.join(sys.argv):
++    argv = ','.join(sys.argv)
++    if "sriov_agent.ini" in argv:
+         sriov_readiness_check()
+-    elif "metadata_agent.ini" not in ','.join(sys.argv):
+-        test_rpc_liveness()
+-    else:
++    elif "metadata_agent.ini" in argv or "ovn_agent.ini" in argv:
+         test_socket_liveness()
++    else:
++        test_rpc_liveness()
+ 
+     sys.exit(0)  # return success
+diff --git a/releasenotes/notes/neutron-ovn-agent-health-probe-aad5b735bf150944.yaml b/releasenotes/notes/neutron-ovn-agent-health-probe-aad5b735bf150944.yaml
+new file mode 100644
+index 000000000..971a60b30
+--- /dev/null
++++ b/releasenotes/notes/neutron-ovn-agent-health-probe-aad5b735bf150944.yaml
+@@ -0,0 +1,19 @@
++---
++fixes:
++  - |
++    The readiness and liveness probes of the ``neutron-ovn-agent`` daemonset
++    now check the agent instead of always succeeding. ``health-probe.py``
++    selects its check from the configuration file name, and ``ovn_agent.ini``
++    matched neither of the names it knew, so the OVN agent took the RPC branch.
++    That branch does not apply to this agent, which serves no RPC and reports
++    its liveness through the OVN southbound database, and it returned success
++    without checking anything because the daemonset passes no
++    ``--agent-queue-name``. A hung agent kept its pod Ready and was never
++    restarted. ``ovn_agent.ini`` now takes the same unix domain socket check as
++    ``ovn_metadata_agent.ini``.
++
++    The check queries the metadata proxy socket, so it assumes the ``metadata``
++    extension is enabled, as it is by default. Deployments that run the OVN
++    agent with other extensions only should disable the probes under
++    ``pod.probes.ovn_agent``.
++...

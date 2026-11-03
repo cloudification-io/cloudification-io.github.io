@@ -1,0 +1,244 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Doug Goldstein <cardoe@cardoe.com>
+Date: Tue, 22 Sep 2026 09:25:13 -0500
+Subject: [PATCH 3/3] fix(neutron): use the right image and security context
+ for the OVN agents
+
+The neutron-ovn-agent and neutron-ovn-metadata-agent daemonsets were
+copied from daemonset-metadata-agent.yaml and never fully renamed, so
+they pulled images.tags.neutron_metadata and read the non-OVN metadata
+agent's security context. Point them at their own values.yaml keys and
+fix the init container names the AppArmor annotations already expected.
+
+Assisted-by: Claude Opus 5
+Signed-off-by: Doug Goldstein <cardoe@cardoe.com>
+Change-Id: I2fdb59f1a119ae9c8d406f16229c10d51bbaf3db
+(cherry picked from commit ba117e4869e8306d636ff86ec6bf0180df113129)
+---
+ neutron/templates/daemonset-ovn-agent.yaml    | 12 ++++++------
+ .../daemonset-ovn-metadata-agent.yaml         | 16 ++++++++--------
+ .../notes/neutron-6b3d9f0a4c82e517.yaml       | 19 +++++++++++++++++++
+ .../neutron/2025.1-ubuntu_jammy.yaml          |  1 +
+ .../neutron/2025.1-ubuntu_noble.yaml          |  1 +
+ .../neutron/2025.2-ubuntu_noble.yaml          |  1 +
+ .../neutron/2026.1-ubuntu_noble.yaml          |  1 +
+ values_overrides/neutron/apparmor.yaml        | 10 ++++++++++
+ .../neutron/loci-2025.1-ubuntu_noble.yaml     |  1 +
+ .../neutron/loci-2025.2-ubuntu_noble.yaml     |  1 +
+ 10 files changed, 49 insertions(+), 14 deletions(-)
+ create mode 100644 releasenotes/notes/neutron-6b3d9f0a4c82e517.yaml
+
+diff --git a/neutron/templates/daemonset-ovn-agent.yaml b/neutron/templates/daemonset-ovn-agent.yaml
+index b219171d3..cbc6df82d 100644
+--- a/neutron/templates/daemonset-ovn-agent.yaml
++++ b/neutron/templates/daemonset-ovn-agent.yaml
+@@ -77,7 +77,7 @@ spec:
+         configmap-bin-hash: {{ tuple "configmap-bin.yaml" . | include "helm-toolkit.utils.hash" }}
+         configmap-etc-hash: {{ tuple "configmap-etc.yaml" . | include "helm-toolkit.utils.hash" }}
+ {{ tuple "neutron_ovn_agent" . | include "helm-toolkit.snippets.custom_pod_annotations" | indent 8 }}
+-{{ dict "envAll" $envAll "podName" "neutron-ovn-agent-default" "containerNames" (list "neutron-ovn-agent" "neutron-ovn-agent-init" "init") | include "helm-toolkit.snippets.kubernetes_mandatory_access_control_annotation" | indent 8 }}
++{{ dict "envAll" $envAll "podName" "neutron-ovn-agent-default" "containerNames" (list "neutron-ovn-agent" "neutron-ovn-agent-init" "ovn-neutron-init" "init") | include "helm-toolkit.snippets.kubernetes_mandatory_access_control_annotation" | indent 8 }}
+     spec:
+ {{ dict "envAll" $envAll "application" "neutron_ovn_agent" | include "helm-toolkit.snippets.kubernetes_pod_security_context" | indent 6 }}
+ {{ tuple "neutron_ovn_agent" . | include "helm-toolkit.snippets.kubernetes_pod_priority_class" | indent 6 }}
+@@ -93,9 +93,9 @@ spec:
+       shareProcessNamespace: true
+       initContainers:
+ {{ tuple $envAll "pod_dependency" $mounts_neutron_ovn_agent_init | include "helm-toolkit.snippets.kubernetes_entrypoint_init_container" | indent 8 }}
+-        - name: neutron-metadata-agent-init
+-{{ tuple $envAll "neutron_metadata" | include "helm-toolkit.snippets.image" | indent 10 }}
+-{{ tuple $envAll $envAll.Values.pod.resources.agent.ovn_metadata | include "helm-toolkit.snippets.kubernetes_resources" | indent 10 }}
++        - name: neutron-ovn-agent-init
++{{ tuple $envAll "neutron_ovn_agent" | include "helm-toolkit.snippets.image" | indent 10 }}
++{{ tuple $envAll $envAll.Values.pod.resources.agent.ovn | include "helm-toolkit.snippets.kubernetes_resources" | indent 10 }}
+ {{ dict "envAll" $envAll "application" "neutron_ovn_agent" "container" "neutron_ovn_agent_init" | include "helm-toolkit.snippets.kubernetes_container_security_context" | indent 10 }}
+           env:
+             - name: NEUTRON_USER_UID
+@@ -121,7 +121,7 @@ spec:
+             - name: socket
+               mountPath: /var/lib/neutron/openstack-helm
+         - name: ovn-neutron-init
+-{{ tuple $envAll "neutron_metadata" | include "helm-toolkit.snippets.image" | indent 10 }}
++{{ tuple $envAll "neutron_ovn_agent" | include "helm-toolkit.snippets.image" | indent 10 }}
+ {{ tuple $envAll $envAll.Values.pod.resources.agent.ovn | include "helm-toolkit.snippets.kubernetes_resources" | indent 10 }}
+ {{ dict "envAll" $envAll "application" "neutron_ovn_agent" "container" "neutron_ovn_agent_init" | include "helm-toolkit.snippets.kubernetes_container_security_context" | indent 10 }}
+           command:
+@@ -135,7 +135,7 @@ spec:
+               readOnly: true
+       containers:
+         - name: neutron-ovn-agent
+-{{ tuple $envAll "neutron_metadata" | include "helm-toolkit.snippets.image" | indent 10 }}
++{{ tuple $envAll "neutron_ovn_agent" | include "helm-toolkit.snippets.image" | indent 10 }}
+ {{ tuple $envAll $envAll.Values.pod.resources.agent.ovn | include "helm-toolkit.snippets.kubernetes_resources" | indent 10 }}
+           env:
+             - name: RPC_PROBE_TIMEOUT
+diff --git a/neutron/templates/daemonset-ovn-metadata-agent.yaml b/neutron/templates/daemonset-ovn-metadata-agent.yaml
+index ab081e037..47c626d42 100644
+--- a/neutron/templates/daemonset-ovn-metadata-agent.yaml
++++ b/neutron/templates/daemonset-ovn-metadata-agent.yaml
+@@ -77,7 +77,7 @@ spec:
+         configmap-bin-hash: {{ tuple "configmap-bin.yaml" . | include "helm-toolkit.utils.hash" }}
+         configmap-etc-hash: {{ tuple "configmap-etc.yaml" . | include "helm-toolkit.utils.hash" }}
+ {{ tuple "neutron_ovn_metadata_agent" . | include "helm-toolkit.snippets.custom_pod_annotations" | indent 8 }}
+-{{ dict "envAll" $envAll "podName" "neutron-ovn-metadata-agent-default" "containerNames" (list "neutron-ovn-metadata-agent" "neutron-ovn-metadata-agent-init" "init") | include "helm-toolkit.snippets.kubernetes_mandatory_access_control_annotation" | indent 8 }}
++{{ dict "envAll" $envAll "podName" "neutron-ovn-metadata-agent-default" "containerNames" (list "neutron-ovn-metadata-agent" "neutron-ovn-metadata-agent-init" "ovn-neutron-init" "init") | include "helm-toolkit.snippets.kubernetes_mandatory_access_control_annotation" | indent 8 }}
+     spec:
+ {{ dict "envAll" $envAll "application" "neutron_ovn_metadata_agent" | include "helm-toolkit.snippets.kubernetes_pod_security_context" | indent 6 }}
+ {{ tuple "neutron_ovn_metadata_agent" . | include "helm-toolkit.snippets.kubernetes_pod_priority_class" | indent 6 }}
+@@ -93,13 +93,13 @@ spec:
+       shareProcessNamespace: true
+       initContainers:
+ {{ tuple $envAll "pod_dependency" $mounts_neutron_ovn_metadata_agent_init | include "helm-toolkit.snippets.kubernetes_entrypoint_init_container" | indent 8 }}
+-        - name: neutron-metadata-agent-init
+-{{ tuple $envAll "neutron_metadata" | include "helm-toolkit.snippets.image" | indent 10 }}
++        - name: neutron-ovn-metadata-agent-init
++{{ tuple $envAll "neutron_ovn_metadata" | include "helm-toolkit.snippets.image" | indent 10 }}
+ {{ tuple $envAll $envAll.Values.pod.resources.agent.ovn_metadata | include "helm-toolkit.snippets.kubernetes_resources" | indent 10 }}
+-{{ dict "envAll" $envAll "application" "neutron_metadata_agent" "container" "neutron_metadata_agent_init" | include "helm-toolkit.snippets.kubernetes_container_security_context" | indent 10 }}
++{{ dict "envAll" $envAll "application" "neutron_ovn_metadata_agent" "container" "neutron_ovn_metadata_agent_init" | include "helm-toolkit.snippets.kubernetes_container_security_context" | indent 10 }}
+           env:
+             - name: NEUTRON_USER_UID
+-              value: "{{ .Values.pod.security_context.neutron_metadata_agent.pod.runAsUser }}"
++              value: "{{ .Values.pod.security_context.neutron_ovn_metadata_agent.pod.runAsUser }}"
+           command:
+             - /tmp/neutron-metadata-agent-init.sh
+           volumeMounts:
+@@ -121,9 +121,9 @@ spec:
+             - name: socket
+               mountPath: /var/lib/neutron/openstack-helm
+         - name: ovn-neutron-init
+-{{ tuple $envAll "neutron_metadata" | include "helm-toolkit.snippets.image" | indent 10 }}
++{{ tuple $envAll "neutron_ovn_metadata" | include "helm-toolkit.snippets.image" | indent 10 }}
+ {{ tuple $envAll $envAll.Values.pod.resources.agent.ovn_metadata | include "helm-toolkit.snippets.kubernetes_resources" | indent 10 }}
+-{{ dict "envAll" $envAll "application" "neutron_metadata_agent" "container" "neutron_metadata_agent_init" | include "helm-toolkit.snippets.kubernetes_container_security_context" | indent 10 }}
++{{ dict "envAll" $envAll "application" "neutron_ovn_metadata_agent" "container" "neutron_ovn_metadata_agent_init" | include "helm-toolkit.snippets.kubernetes_container_security_context" | indent 10 }}
+           command:
+             - /tmp/neutron-ovn-init.sh
+           volumeMounts:
+@@ -135,7 +135,7 @@ spec:
+               readOnly: true
+       containers:
+         - name: neutron-ovn-metadata-agent
+-{{ tuple $envAll "neutron_metadata" | include "helm-toolkit.snippets.image" | indent 10 }}
++{{ tuple $envAll "neutron_ovn_metadata" | include "helm-toolkit.snippets.image" | indent 10 }}
+ {{ tuple $envAll $envAll.Values.pod.resources.agent.ovn_metadata | include "helm-toolkit.snippets.kubernetes_resources" | indent 10 }}
+           env:
+             - name: RPC_PROBE_TIMEOUT
+diff --git a/releasenotes/notes/neutron-6b3d9f0a4c82e517.yaml b/releasenotes/notes/neutron-6b3d9f0a4c82e517.yaml
+new file mode 100644
+index 000000000..d0b9af1d4
+--- /dev/null
++++ b/releasenotes/notes/neutron-6b3d9f0a4c82e517.yaml
+@@ -0,0 +1,19 @@
++---
++neutron:
++  - |
++    The ``neutron-ovn-agent`` and ``neutron-ovn-metadata-agent`` daemonsets now
++    use their own ``images.tags.neutron_ovn_agent`` and
++    ``images.tags.neutron_ovn_metadata`` tags instead of
++    ``images.tags.neutron_metadata``, and ``neutron-ovn-metadata-agent`` reads
++    its init container security context from
++    ``pod.security_context.neutron_ovn_metadata_agent``. Previously overriding
++    only the OVN ``runAsUser`` left the init container chowning the metadata
++    proxy socket directory to the wrong UID.
++
++    The first init container of each daemonset is renamed to
++    ``neutron-ovn-agent-init`` and ``neutron-ovn-metadata-agent-init``, matching
++    the names the AppArmor annotations already expected, and
++    ``ovn-neutron-init`` is added to those lists. Operators setting
++    ``pod.mandatory_access_control`` profiles for these pods must update the
++    container keys.
++...
+diff --git a/values_overrides/neutron/2025.1-ubuntu_jammy.yaml b/values_overrides/neutron/2025.1-ubuntu_jammy.yaml
+index 3032f6423..4a250368d 100644
+--- a/values_overrides/neutron/2025.1-ubuntu_jammy.yaml
++++ b/values_overrides/neutron/2025.1-ubuntu_jammy.yaml
+@@ -12,6 +12,7 @@ images:
+     neutron_l3: "quay.io/airshipit/neutron:2025.1-ubuntu_jammy"
+     neutron_l2gw: "quay.io/airshipit/neutron:2025.1-ubuntu_jammy"
+     neutron_metadata: "quay.io/airshipit/neutron:2025.1-ubuntu_jammy"
++    neutron_ovn_agent: "quay.io/airshipit/neutron:2025.1-ubuntu_jammy"
+     neutron_ovn_metadata: "quay.io/airshipit/neutron:2025.1-ubuntu_jammy"
+     neutron_openvswitch_agent: "quay.io/airshipit/neutron:2025.1-ubuntu_jammy"
+     neutron_server: "quay.io/airshipit/neutron:2025.1-ubuntu_jammy"
+diff --git a/values_overrides/neutron/2025.1-ubuntu_noble.yaml b/values_overrides/neutron/2025.1-ubuntu_noble.yaml
+index 1b246abc0..aae9b87e2 100644
+--- a/values_overrides/neutron/2025.1-ubuntu_noble.yaml
++++ b/values_overrides/neutron/2025.1-ubuntu_noble.yaml
+@@ -12,6 +12,7 @@ images:
+     neutron_l3: "quay.io/airshipit/neutron:2025.1-ubuntu_noble"
+     neutron_l2gw: "quay.io/airshipit/neutron:2025.1-ubuntu_noble"
+     neutron_metadata: "quay.io/airshipit/neutron:2025.1-ubuntu_noble"
++    neutron_ovn_agent: "quay.io/airshipit/neutron:2025.1-ubuntu_noble"
+     neutron_ovn_metadata: "quay.io/airshipit/neutron:2025.1-ubuntu_noble"
+     neutron_openvswitch_agent: "quay.io/airshipit/neutron:2025.1-ubuntu_noble"
+     neutron_server: "quay.io/airshipit/neutron:2025.1-ubuntu_noble"
+diff --git a/values_overrides/neutron/2025.2-ubuntu_noble.yaml b/values_overrides/neutron/2025.2-ubuntu_noble.yaml
+index 9d63561d7..94f1f9bc3 100644
+--- a/values_overrides/neutron/2025.2-ubuntu_noble.yaml
++++ b/values_overrides/neutron/2025.2-ubuntu_noble.yaml
+@@ -12,6 +12,7 @@ images:
+     neutron_l3: "quay.io/airshipit/neutron:2025.2-ubuntu_noble"
+     neutron_l2gw: "quay.io/airshipit/neutron:2025.2-ubuntu_noble"
+     neutron_metadata: "quay.io/airshipit/neutron:2025.2-ubuntu_noble"
++    neutron_ovn_agent: "quay.io/airshipit/neutron:2025.2-ubuntu_noble"
+     neutron_ovn_metadata: "quay.io/airshipit/neutron:2025.2-ubuntu_noble"
+     neutron_openvswitch_agent: "quay.io/airshipit/neutron:2025.2-ubuntu_noble"
+     neutron_server: "quay.io/airshipit/neutron:2025.2-ubuntu_noble"
+diff --git a/values_overrides/neutron/2026.1-ubuntu_noble.yaml b/values_overrides/neutron/2026.1-ubuntu_noble.yaml
+index b0b34a96d..c3f6914a5 100644
+--- a/values_overrides/neutron/2026.1-ubuntu_noble.yaml
++++ b/values_overrides/neutron/2026.1-ubuntu_noble.yaml
+@@ -12,6 +12,7 @@ images:
+     neutron_l3: "quay.io/airshipit/neutron:2026.1-ubuntu_noble"
+     neutron_l2gw: "quay.io/airshipit/neutron:2026.1-ubuntu_noble"
+     neutron_metadata: "quay.io/airshipit/neutron:2026.1-ubuntu_noble"
++    neutron_ovn_agent: "quay.io/airshipit/neutron:2026.1-ubuntu_noble"
+     neutron_ovn_metadata: "quay.io/airshipit/neutron:2026.1-ubuntu_noble"
+     neutron_openvswitch_agent: "quay.io/airshipit/neutron:2026.1-ubuntu_noble"
+     neutron_server: "quay.io/airshipit/neutron:2026.1-ubuntu_noble"
+diff --git a/values_overrides/neutron/apparmor.yaml b/values_overrides/neutron/apparmor.yaml
+index bf5d3e78f..f22c1cd61 100644
+--- a/values_overrides/neutron/apparmor.yaml
++++ b/values_overrides/neutron/apparmor.yaml
+@@ -33,6 +33,16 @@ pod:
+         neutron_metadata_agent_init:
+           appArmorProfile:
+             type: RuntimeDefault
++    neutron_ovn_agent:
++      container:
++        neutron_ovn_agent_init:
++          appArmorProfile:
++            type: RuntimeDefault
++    neutron_ovn_metadata_agent:
++      container:
++        neutron_ovn_metadata_agent_init:
++          appArmorProfile:
++            type: RuntimeDefault
+     neutron_ovs_agent:
+       container:
+         neutron_ovs_agent:
+diff --git a/values_overrides/neutron/loci-2025.1-ubuntu_noble.yaml b/values_overrides/neutron/loci-2025.1-ubuntu_noble.yaml
+index fb096733a..d29696980 100644
+--- a/values_overrides/neutron/loci-2025.1-ubuntu_noble.yaml
++++ b/values_overrides/neutron/loci-2025.1-ubuntu_noble.yaml
+@@ -12,6 +12,7 @@ images:
+     neutron_l3: "quay.io/airshipit/neutron:2025.1-ubuntu_noble_loci"
+     neutron_l2gw: "quay.io/airshipit/neutron:2025.1-ubuntu_noble_loci"
+     neutron_metadata: "quay.io/airshipit/neutron:2025.1-ubuntu_noble_loci"
++    neutron_ovn_agent: "quay.io/airshipit/neutron:2025.1-ubuntu_noble_loci"
+     neutron_ovn_metadata: "quay.io/airshipit/neutron:2025.1-ubuntu_noble_loci"
+     neutron_openvswitch_agent: "quay.io/airshipit/neutron:2025.1-ubuntu_noble_loci"
+     neutron_server: "quay.io/airshipit/neutron:2025.1-ubuntu_noble_loci"
+diff --git a/values_overrides/neutron/loci-2025.2-ubuntu_noble.yaml b/values_overrides/neutron/loci-2025.2-ubuntu_noble.yaml
+index b38385e3d..11adb30a8 100644
+--- a/values_overrides/neutron/loci-2025.2-ubuntu_noble.yaml
++++ b/values_overrides/neutron/loci-2025.2-ubuntu_noble.yaml
+@@ -12,6 +12,7 @@ images:
+     neutron_l3: "quay.io/airshipit/neutron:2025.2-ubuntu_noble_loci"
+     neutron_l2gw: "quay.io/airshipit/neutron:2025.2-ubuntu_noble_loci"
+     neutron_metadata: "quay.io/airshipit/neutron:2025.2-ubuntu_noble_loci"
++    neutron_ovn_agent: "quay.io/airshipit/neutron:2025.2-ubuntu_noble_loci"
+     neutron_ovn_metadata: "quay.io/airshipit/neutron:2025.2-ubuntu_noble_loci"
+     neutron_openvswitch_agent: "quay.io/airshipit/neutron:2025.2-ubuntu_noble_loci"
+     neutron_server: "quay.io/airshipit/neutron:2025.2-ubuntu_noble_loci"

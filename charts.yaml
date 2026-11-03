@@ -54,3 +54,7 @@ releases:
       placement: {}
       redis: {}
       skyline: {}
+  "2026.2":
+    commit: e72c2093c23af42477c19b55ac4822236088a83d  # tag 2026.2.0
+    charts:
+      neutron: {}

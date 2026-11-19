@@ -2814,4 +2814,25 @@ entries:
     urls:
     - https://cloudification-io.github.io/skyline-2025.2.0.tgz
     version: 2025.2.0
-generated: "2026-11-03T17:15:21.980453+02:00"
+  watcher:
+  - apiVersion: v2
+    appVersion: 16.0.0
+    created: "2026-11-19T13:26:33.422169583+03:00"
+    dependencies:
+    - name: helm-toolkit
+      repository: https://cloudification-io.github.io
+      version: '>= 0.1.0'
+    description: OpenStack-Helm Watcher
+    digest: 7e3277dad5a2696f30b0ec82f4eb79e31783ffe5191980e8e6402a3f4bd614e9
+    home: https://docs.openstack.org/watcher/latest/
+    icon: https://www.openstack.org/themes/openstack/images/project-mascots/Watcher/OpenStack_Project_Watcher_vertical.png
+    maintainers:
+    - name: OpenStack-Helm Authors
+    name: watcher
+    sources:
+    - https://opendev.org/openstack/watcher
+    - https://opendev.org/openstack/openstack-helm
+    urls:
+    - https://cloudification-io.github.io/watcher-2026.1.0.tgz
+    version: 2026.1.0
+generated: "2026-11-19T13:26:33.418281984+03:00"
